@@ -2,7 +2,7 @@ package classes;
 
 import java.util.Objects;
 
-public class ScrabInt {
+public class ScrabInt extends AbstractScrab {
     int theInt;
 
     public ScrabInt(int theInt) {
@@ -13,10 +13,33 @@ public class ScrabInt {
         return theInt;
     }
 
+    public int toInt(){
+        return getInt();
+    }
     @Override
     public String toString() {
-        return Integer.toString(this.getInt());
+        return String.valueOf(toInt());
     }
+
+    public ScrabString toScrabString(){
+        return new ScrabString(toString());
+    }
+
+    public double toFloat(){
+        return (double) Float.valueOf(toString());
+    }
+
+    public ScrabFloat toScrabFloat(){
+        return new ScrabFloat(toFloat());
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -24,11 +47,6 @@ public class ScrabInt {
         if (o == null || getClass() != o.getClass()) return false;
         ScrabInt scrabInt = (ScrabInt) o;
         return theInt == scrabInt.theInt;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(theInt);
     }
 }
 
