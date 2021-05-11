@@ -17,10 +17,21 @@ public class ScrabFloat  extends AbstractScrab {
         return String.valueOf(this.getFloat());
     }
 
+
+    /** transforms Scrabble Double to Scrabble String
+     *
+     * @return a Scrabble String representing the Scrabble Double
+     */
     public ScrabString toScrabString(){
         return new ScrabString(toString());
     }
 
+
+    /** check if the object is equal
+     *
+     * @param o object to compare to
+     * @return a boolean stating if o and this are equals
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

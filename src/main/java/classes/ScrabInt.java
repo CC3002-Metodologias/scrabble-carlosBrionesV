@@ -1,7 +1,10 @@
 package classes;
 
 import java.util.Objects;
-
+/** Constructor of ScrabInt class
+ *
+ *
+ */
 public class ScrabInt extends AbstractScrab {
     int theInt;
 
@@ -13,14 +16,15 @@ public class ScrabInt extends AbstractScrab {
         return theInt;
     }
 
-    public int toInt(){
-        return getInt();
-    }
     @Override
     public String toString() {
-        return String.valueOf(toInt());
+        return String.valueOf(getInt());
     }
 
+    /** transforms Scrabble int to Scrabble String
+     *
+     * @return a Scrabble String representing the Scrabble int
+     */
     public ScrabString toScrabString(){
         return new ScrabString(toString());
     }
@@ -33,14 +37,11 @@ public class ScrabInt extends AbstractScrab {
         return new ScrabFloat(toFloat());
     }
 
-
-
-
-
-
-
-
-
+    /** check if the object is equal
+     *
+     * @param o object to compare to
+     * @return a boolean stating if o and this are equals
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
