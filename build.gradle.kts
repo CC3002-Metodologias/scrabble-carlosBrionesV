@@ -36,6 +36,7 @@ dependencies {
         name = "annotations",
         version = jbAnnotationsVersion
     )
+    implementation("junit:junit:4.12")
     testImplementation(
         group = "org.junit.jupiter", name = "junit-jupiter-api",
         version = junitVersion
@@ -44,7 +45,6 @@ dependencies {
         group = "org.junit.jupiter", name = "junit-jupiter-engine",
         version = junitVersion
     )
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.8.0-M1")
 
     implementation(
         group = "org.apache.commons",
