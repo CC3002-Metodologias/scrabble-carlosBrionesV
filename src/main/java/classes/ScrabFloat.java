@@ -1,26 +1,48 @@
 package classes;
 
-import java.util.Objects;
-
+/**
+ * Scrabble Float Class
+ */
 public class ScrabFloat  extends AbstractScrab {
     double theDouble;
+
+    /**
+     * constructor of class ScrabFloat
+     * @param d the double value
+     */
     public ScrabFloat(double d){
         theDouble=d;
     }
 
+    /**
+     * getter method for ScrabFloat
+     * @return te double value
+     */
     public double getFloat(){
         return theDouble;
     }
 
+    /**
+     * change the value of the ScrabFloat
+     * @param theDouble the new double value
+     */
+    public void setFloat(double theDouble) {
+        this.theDouble = theDouble;
+    }
+
+    /**
+     * to string for printing purposes
+     * @return the string version of the Scrabble Float
+     */
     @Override
     public String toString(){
         return String.valueOf(this.getFloat());
     }
 
 
-    /** transforms Scrabble Double to Scrabble String
-     *
-     * @return a Scrabble String representing the Scrabble Double
+    /**
+     * transforms Scrabble Float to Scrabble String
+     * @return a Scrabble String representing the Scrabble Float
      */
     public ScrabString toScrabString(){
         return new ScrabString(toString());

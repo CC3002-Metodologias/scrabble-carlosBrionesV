@@ -8,14 +8,34 @@ import java.util.Objects;
 public class ScrabInt extends AbstractScrab {
     int theInt;
 
+    /** Scrabble int constructor
+     *
+     * @param theInt an int
+     */
     public ScrabInt(int theInt) {
         this.theInt = theInt;
     }
 
+    /** getter for Scrabint
+     *
+     * @return the Scrabble int value
+     */
     private int getInt() {
         return theInt;
     }
 
+    /**
+     * change the value of the ScrabInt
+     * @param theInt the new int value
+     */
+    public void setInt(int theInt) {
+        this.theInt = theInt;
+    }
+
+    /** to string method for printing purposes
+     *
+     * @return a String representing the Scrabble int
+     */
     @Override
     public String toString() {
         return String.valueOf(getInt());
@@ -29,10 +49,18 @@ public class ScrabInt extends AbstractScrab {
         return new ScrabString(toString());
     }
 
+    /** transforms Scrabble int to double type
+     *
+     * @return a double representing the Scrabble int
+     */
     public double toFloat(){
-        return (double) Float.valueOf(toString());
+        return Float.parseFloat(toString());
     }
 
+    /** transforms Scrabble int to Scrabble Float
+     *
+     * @return a Scrabble Float representing the Scrabble int
+     */
     public ScrabFloat toScrabFloat(){
         return new ScrabFloat(toFloat());
     }
