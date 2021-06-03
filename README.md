@@ -14,3 +14,14 @@ _University of Chile_.
 ---
 
 **The rest of the documentation is left for the users of this template to complete**
+
+Solo existe la implementacion de las clases correspondientes a los tipos String, Boolean, Int, Float y
+binary con sus respectivas funcionalidades y los tests para ellas. Existen tres interfaces de momento, SNumber para 
+los tipos que operan con binarios y enteros, SFloat para los que operan con Floats y Slogic para los tipos que poseen 
+la operación _Y_ lógico y _O_ lógico. En esta versión hay problemas con operaciones matemáticas y transformaciones 
+que involucran binarios.
+
+Para ejecutar los tests se debe utilizar gradle ejecutando los test en 'scrabble.test'.
+
+En los binaarios su suma se realiza bit a bit, para el resto de sus operaciones se transforma a entero
+y luego pasa al tipo requerido. 
