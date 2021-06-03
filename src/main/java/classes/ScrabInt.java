@@ -13,6 +13,7 @@ public class ScrabInt implements SNumber,SFloat {
     /**
      * Constructor of ScrabInt
      * @param theInt the int value
+
      */
     public ScrabInt(int theInt) {
         this.theInt = theInt;

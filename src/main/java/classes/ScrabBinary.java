@@ -3,6 +3,7 @@ package classes;
 import java.util.Objects;
 
 /**
+
  * Scrabble Binary class
  */
 public class ScrabBinary implements Slogic,SNumber{
@@ -39,6 +40,7 @@ public class ScrabBinary implements Slogic,SNumber{
     }
 
     /**
+
      * setter method of the ScrabBinary
      * @param bin the binary string to remplace
      */
@@ -56,10 +58,12 @@ public class ScrabBinary implements Slogic,SNumber{
     }
 
     /**
+
      * transforms the ScrabBinary to ScrabString
      * @return a Scrabble String representing the ScrabBinary
      */
     public ScrabString toScrabString(){
+
         return new ScrabString(toString());
     }
 
@@ -432,7 +436,6 @@ public class ScrabBinary implements Slogic,SNumber{
     }
 
     /** check if the object is equal
-     *
      * @param o object to compare to
      * @return a boolean stating if o and this are equals
      */

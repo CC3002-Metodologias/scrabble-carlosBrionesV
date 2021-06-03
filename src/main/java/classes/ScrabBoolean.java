@@ -6,6 +6,7 @@ import java.util.Objects;
  * ScrabBoolean Class
  */
 public class ScrabBoolean implements Slogic{
+
     boolean theBool;
 
     /**
@@ -25,6 +26,7 @@ public class ScrabBoolean implements Slogic{
     }
 
     /**
+
      * Setter method for ScrabBoolean
      * @param Boolean boolean value to remplace
      */
@@ -139,6 +141,7 @@ public class ScrabBoolean implements Slogic{
 
     /** check if the object is equal
      *
+
      * @param o object to compare to
      * @return a boolean stating if o and this are equals
      */
