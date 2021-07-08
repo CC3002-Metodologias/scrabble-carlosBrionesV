@@ -1,4 +1,7 @@
-package classes;
+package STypes.Numbers;
+
+import AST.Operations.AbstractConstant;
+import STypes.ScrabString;
 
 import java.util.Objects;
 
@@ -7,15 +10,15 @@ import static java.lang.StrictMath.abs;
 /**
  * Scrabble Float class
  */
-public class ScrabFloat implements SFloat {
-    double theDouble;
+public class ScrabFloat extends AbstractConstant implements SNumber {
+    double value;
 
     /**
      * constructor of ScrabFloat class
      * @param d the double value
      */
     public ScrabFloat(double d){
-        theDouble=d;
+        value=d;
     }
 
     /**
@@ -23,7 +26,7 @@ public class ScrabFloat implements SFloat {
      * @return the double value of the ScrabFloat
      */
     public double getFloat(){
-        return theDouble;
+        return value;
     }
 
     /** to String for printing purposes
@@ -44,9 +47,15 @@ public class ScrabFloat implements SFloat {
     }
 
     /**
+     * copies the ScrabFloat
+     * @return a new ScrabFloat
+     */
+    public ScrabFloat toScrabFloat(){return new ScrabFloat(getFloat());}
+
+    /**
      * negates the value of the ScrabFloat
      */
-    public void neg(){theDouble=-getFloat();}
+    public void neg(){value=-getFloat();}
 
     /**
      * {@inheritDoc}
@@ -54,9 +63,6 @@ public class ScrabFloat implements SFloat {
      * @return a ScrabFloat
      */
     public ScrabFloat add(SNumber scrab) {
-        return scrab.addFloat(this);
-    }
-    public ScrabFloat add(ScrabFloat scrab) {
         return scrab.addFloat(this);
     }
 
@@ -68,9 +74,6 @@ public class ScrabFloat implements SFloat {
     public ScrabFloat minus(SNumber scrab) {
         return scrab.minusFloat(this);
     }
-    public ScrabFloat minus(ScrabFloat scrab) {
-        return scrab.minusFloat(this);
-    }
 
     /**
      * {@inheritDoc}
@@ -80,9 +83,6 @@ public class ScrabFloat implements SFloat {
     public ScrabFloat mult(SNumber scrab) {
         return scrab.multFloat(this);
     }
-    public ScrabFloat mult(ScrabFloat scrab) {
-        return scrab.multFloat(this);
-    }
 
     /**
      * {@inheritDoc}
@@ -90,9 +90,6 @@ public class ScrabFloat implements SFloat {
      * @return a ScrabFloat
      */
     public ScrabFloat div(SNumber scrab) {
-        return scrab.divFloat(this);
-    }
-    public ScrabFloat div(ScrabFloat scrab) {
         return scrab.divFloat(this);
     }
 
@@ -190,7 +187,7 @@ public class ScrabFloat implements SFloat {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(theDouble);
+        return Objects.hash(value);
     }
 
     /** check if the object is equal
@@ -203,6 +200,6 @@ public class ScrabFloat implements SFloat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScrabFloat that = (ScrabFloat) o;
-        return abs(that.theDouble - theDouble) < 0.01;
+        return abs(that.value - value) < 0.01;
     }
 }

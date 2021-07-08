@@ -1,12 +1,19 @@
-package classes;
+package STypes.Numbers;
+
+import AST.Operations.AbstractConstant;
+import STypes.ScrabType;
+import operands.BinaryOperand;
+import operands.Slogic;
+import STypes.ScrabBoolean;
+import STypes.ScrabString;
 
 import java.util.Objects;
 
 /**
  * Scrabble Binary class
  */
-public class ScrabBinary implements Slogic,SNumber{
-    String theBin;
+public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slogic, SNumber {
+    String value;
 
     /** constructor of class ScrabBinary
      *
@@ -27,7 +34,7 @@ public class ScrabBinary implements Slogic,SNumber{
                 }
             }
             str.reverse();
-        theBin=str.toString();
+        value=str.toString();
     }
 
     /**
@@ -35,7 +42,7 @@ public class ScrabBinary implements Slogic,SNumber{
      * @return the Binary number as a String
      */
     public String getBin(){
-        return theBin;
+        return value;
     }
 
     /**
@@ -43,7 +50,7 @@ public class ScrabBinary implements Slogic,SNumber{
      * @param bin the binary string to remplace
      */
     public void setBin(String bin){
-        theBin=new ScrabBinary(bin).toString();
+        value=new ScrabBinary(bin).toString();
     }
 
     /**
@@ -62,6 +69,12 @@ public class ScrabBinary implements Slogic,SNumber{
     public ScrabString toScrabString(){
         return new ScrabString(toString());
     }
+
+    /**
+     * copies the ScrabBinary
+     * @return a new ScrabBinary
+     */
+    public ScrabBinary toScrabBinary(){return new ScrabBinary(toString());}
 
     /**
      * turns a binary String into a int
@@ -168,7 +181,7 @@ public class ScrabBinary implements Slogic,SNumber{
      * @param scrab a ScrabBinary or a ScrabInt
      * @return a new ScrabBinary with the values added
      */
-    public ScrabBinary add(SNumber scrab){
+    public ScrabType add(BinaryOperand scrab){
         return scrab.addBinary(this);
     }
 
@@ -177,7 +190,7 @@ public class ScrabBinary implements Slogic,SNumber{
      * @param scrab a ScrabBinary or a ScrabInt
      * @return a new ScrabBinary with the values multiplicated
      */
-    public ScrabBinary mult(SNumber scrab){
+    public ScrabType mult(BinaryOperand scrab){
         return scrab.multBinary(this);
     }
 
@@ -186,7 +199,7 @@ public class ScrabBinary implements Slogic,SNumber{
      * @param scrab a ScrabBinary or a ScrabInt
      * @return a new ScrabBinary with the values divided
      */
-    public ScrabBinary div(SNumber scrab){
+    public ScrabType div(BinaryOperand scrab){
         return scrab.divBinary(this);
     }
 
@@ -195,7 +208,7 @@ public class ScrabBinary implements Slogic,SNumber{
      * @param scrab a ScrabBinary or a ScrabInt
      * @return a new ScrabBinary with the values subtracted
      */
-    public ScrabBinary minus(SNumber scrab){
+    public ScrabType minus(BinaryOperand scrab){
         return scrab.minusBinary(this);
     }
 
@@ -428,7 +441,7 @@ public class ScrabBinary implements Slogic,SNumber{
      */
     @Override
     public int hashCode() {
-        return Objects.hash(theBin);
+        return Objects.hash(value);
     }
 
     /** check if the object is equal
@@ -441,6 +454,16 @@ public class ScrabBinary implements Slogic,SNumber{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScrabBinary that = (ScrabBinary) o;
-        return Objects.equals(theBin, that.theBin);
+        return Objects.equals(value, that.value);
+    }
+
+    /**
+     * to evaluate Operations and Constants
+     *
+     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     */
+    @Override
+    public AbstractConstant Eval() {
+        return this;
     }
 }

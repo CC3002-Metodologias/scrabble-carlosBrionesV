@@ -1,19 +1,21 @@
-package classes;
+package STypes;
+
+import AST.Operations.AbstractConstant;
 
 import java.util.Objects;
 
 /**
  * Scrabble String class
  */
-public class ScrabString {
-    String theStr;
+public class ScrabString extends AbstractConstant implements ScrabType{
+    String value;
 
     /**
      * constructor of ScrabString
      * @param str the String Value
      */
     public ScrabString(String str){
-        theStr=str;
+        value=str;
     }
 
     /**
@@ -22,7 +24,15 @@ public class ScrabString {
      */
     @Override
     public String toString() {
-        return theStr;
+        return value;
+    }
+
+    /**
+     * copies the ScrabString
+     * @return a new ScrabString
+     */
+    public ScrabString toScrabString(){
+      return new ScrabString(value);
     }
 
     /**
@@ -30,7 +40,7 @@ public class ScrabString {
      * @param scrab the Scrabble object
      * @return a new ScrabString concatenating ScrabString+scrab
      */
-    public ScrabString add(Object scrab){
+    public ScrabString add(ScrabType scrab){
         return new ScrabString(toString()+scrab.toString());
     }
 
@@ -40,7 +50,7 @@ public class ScrabString {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(theStr);
+        return Objects.hash(value);
     }
 
     /**

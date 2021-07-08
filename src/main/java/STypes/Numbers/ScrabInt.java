@@ -1,4 +1,8 @@
-package classes;
+package STypes.Numbers;
+
+import AST.Operations.AbstractConstant;
+import operands.BinaryOperand;
+import STypes.ScrabString;
 
 import java.util.Objects;
 
@@ -7,15 +11,15 @@ import static java.lang.Math.abs;
 /**
  * Scrabble Int class
  */
-public class ScrabInt implements SNumber,SFloat {
-    int theInt;
+public class ScrabInt extends AbstractConstant implements SNumber, BinaryOperand{
+    int value;
 
     /**
      * Constructor of ScrabInt
-     * @param theInt the int value
+     * @param value the int value
      */
-    public ScrabInt(int theInt) {
-        this.theInt = theInt;
+    public ScrabInt(int value) {
+        this.value = value;
     }
 
     /**
@@ -23,7 +27,7 @@ public class ScrabInt implements SNumber,SFloat {
      * @return the ScrabInt value
      */
     public int getInt() {
-        return theInt;
+        return value;
     }
 
     /**
@@ -31,7 +35,7 @@ public class ScrabInt implements SNumber,SFloat {
      * @param Int the int value to remplace
      */
     public void setInt(int Int){
-        theInt=Int;
+        value=Int;
     }
 
     /**
@@ -53,18 +57,8 @@ public class ScrabInt implements SNumber,SFloat {
      * @param scrab a ScrabInt or a ScrabBinary
      * @return a ScrabInt
      */
-    public ScrabInt add(SNumber scrab) {
-        return (ScrabInt) scrab.addInt(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param scrabFloat the ScrabFloat to add
-     * @return a new ScrabFloat with the values added
-     */
-    public ScrabFloat add(ScrabFloat scrabFloat) {
-        return scrabFloat.addInt(this);
+    public SNumber add(SNumber scrab) {
+        return scrab.addInt(this);
     }
 
     /**
@@ -72,18 +66,8 @@ public class ScrabInt implements SNumber,SFloat {
      * @param scrab a ScrabInt or a ScrabBinary
      * @return a ScrabInt
      */
-    public ScrabInt mult(SNumber scrab){
-        return (ScrabInt) scrab.multInt(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param scrabFloat the ScrabFloat to multiply
-     * @return a new ScrabFloat with the values multiplied
-     */
-    public ScrabFloat mult(ScrabFloat scrabFloat) {
-        return scrabFloat.multInt(this);
+    public SNumber mult(SNumber scrab){
+        return scrab.multInt(this);
     }
 
     /**
@@ -91,36 +75,17 @@ public class ScrabInt implements SNumber,SFloat {
      * @param scrab a ScrabInt or a ScrabBinary
      * @return a ScrabInt
      */
-    public ScrabInt div(SNumber scrab){
-        return (ScrabInt) scrab.divInt(this);
+    public SNumber div(SNumber scrab){
+        return scrab.divInt(this);
     }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param scrabFloat the ScrabFloat to divide
-     * @return a new ScrabFloat with the values divided
-     */
-    public ScrabFloat div(ScrabFloat scrabFloat) {
-        return scrabFloat.divInt(this);    }
 
     /**
      * {@inheritDoc}
      * @param scrab a ScrabInt or a ScrabBinary
      * @return a ScrabInt
      */
-    public ScrabInt minus(SNumber scrab){
-        return (ScrabInt) scrab.minusInt(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param scrabFloat the ScrabFloat to subtract
-     * @return a new ScrabFloat with the values subtracted
-     */
-    public ScrabFloat minus(ScrabFloat scrabFloat) {
-        return scrabFloat.minusInt(this);
+    public SNumber minus(SNumber scrab){
+        return scrab.minusInt(this);
     }
 
     /**
@@ -272,6 +237,12 @@ public class ScrabInt implements SNumber,SFloat {
     }
 
     /**
+     * copies the ScrabInt
+     * @return a new ScrabInt
+     */
+    public ScrabInt toScrabInt(){return new ScrabInt(getInt());}
+
+    /**
      * transforms a ScrabInt to a Float
      * @return the Float representation of the ScrabInt
      */
@@ -331,7 +302,7 @@ public class ScrabInt implements SNumber,SFloat {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(theInt);
+        return Objects.hash(value);
     }
 
     /** check if the object is equal
@@ -344,7 +315,7 @@ public class ScrabInt implements SNumber,SFloat {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScrabInt scrabInt = (ScrabInt) o;
-        return theInt == scrabInt.theInt;
+        return value == scrabInt.value;
     }
 
 

@@ -1,5 +1,8 @@
 package classes;
 
+import STypes.Numbers.ScrabBinary;
+import STypes.ScrabBoolean;
+import STypes.ScrabString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

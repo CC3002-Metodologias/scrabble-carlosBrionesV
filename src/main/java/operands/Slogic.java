@@ -1,9 +1,13 @@
-package classes;
+package operands;
+
+import STypes.Numbers.ScrabBinary;
+import STypes.ScrabBoolean;
+import STypes.ScrabType;
 
 /**
  * interface for logic with ScrabBoolean and ScrabBinary
  */
-public interface Slogic {
+public interface Slogic extends ScrabType {
     /**
      * Logic operation AND
      * @param logic ScrabBoolean or ScrabBinary value

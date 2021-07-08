@@ -1,7 +1,14 @@
 package classes;
 
+
+import STypes.Numbers.ScrabBinary;
+import STypes.Numbers.ScrabFloat;
+import STypes.Numbers.ScrabInt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import STypes.ScrabBoolean;
+import STypes.ScrabString;
 
 import static org.junit.jupiter.api.Assertions.*;
 

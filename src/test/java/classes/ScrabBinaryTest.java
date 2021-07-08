@@ -1,9 +1,15 @@
 package classes;
 
+
+import STypes.Numbers.ScrabBinary;
+import STypes.Numbers.ScrabFloat;
+import STypes.Numbers.ScrabInt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
+import STypes.ScrabBoolean;
+import STypes.ScrabString;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,8 +100,7 @@ class ScrabBinaryTest {
         }
         var expected = new ScrabInt(i2+i1).toScrabBinary();
 
-        bin=bin.add(op);
-        assertEquals(expected,bin);
+        assertEquals(expected,bin.add(op));
 
     }
 
@@ -118,8 +123,7 @@ class ScrabBinaryTest {
         }
         var expected= new ScrabInt(i1+i2).toScrabBinary();
         var sb=new ScrabBinary(operator);
-        bin=bin.add(sb);
-        assertEquals(expected,bin);
+        assertEquals(expected,bin.add(sb));
     }
 
     @Test
@@ -142,8 +146,8 @@ class ScrabBinaryTest {
         }
         var expected = new ScrabInt(i2*i1).toScrabBinary();
 
-        bin=bin.mult(op);
-        assertEquals(expected,bin);
+
+        assertEquals(expected,bin.mult(op));
 
     }
 
@@ -166,8 +170,7 @@ class ScrabBinaryTest {
         }
         var expected= new ScrabInt(i1*i2).toScrabBinary();
         var sb=new ScrabBinary(operator);
-        bin=bin.mult(sb);
-        assertEquals(expected,bin);
+        assertEquals(expected,bin.mult(sb));
     }
 
     @Test
@@ -190,8 +193,8 @@ class ScrabBinaryTest {
         }
         var expected = new ScrabInt(i1/i2).toScrabBinary();
 
-        bin=bin.div(op);
-        assertEquals(expected,bin);
+
+        assertEquals(expected,bin.div(op));
 
     }
 
@@ -214,8 +217,7 @@ class ScrabBinaryTest {
         }
         var expected= new ScrabInt(i2/i1).toScrabBinary();
         var sb=new ScrabBinary(operator);
-        bin=bin.div(sb);
-        assertEquals(expected,bin);
+        assertEquals(expected,bin.div(sb));
     }
 
     @Test
@@ -238,9 +240,7 @@ class ScrabBinaryTest {
         }
         var expected = new ScrabInt(i1-i2).toScrabBinary();
 
-        bin=bin.minus(op);
-        assertEquals(expected,bin);
-
+        assertEquals(expected,bin.minus(op));
     }
 
     @Test
@@ -262,8 +262,7 @@ class ScrabBinaryTest {
         }
         var expected= new ScrabInt(i2-i1).toScrabBinary();
         var sb=new ScrabBinary(operator);
-        bin=bin.minus(sb);
-        assertEquals(expected,bin);
+        assertEquals(expected,bin.minus(sb));
     }
 
 

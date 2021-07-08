@@ -1,19 +1,24 @@
-package classes;
+package STypes;
+
+import AST.Operations.AbstractConstant;
+import AST.Operation;
+import operands.Slogic;
+import STypes.Numbers.ScrabBinary;
 
 import java.util.Objects;
 
 /**
  * ScrabBoolean Class
  */
-public class ScrabBoolean implements Slogic{
-    boolean theBool;
+public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType, Operation {
+    boolean value;
 
     /**
      * constructor of class ScrabBoolean
      * @param b the boolean value
      */
     public ScrabBoolean(boolean b){
-        theBool=b;
+        value=b;
     }
 
     /**
@@ -21,7 +26,7 @@ public class ScrabBoolean implements Slogic{
      * @return The Boolean value
      */
      public Boolean getBool(){
-        return theBool;
+        return value;
     }
 
     /**
@@ -29,7 +34,7 @@ public class ScrabBoolean implements Slogic{
      * @param Boolean boolean value to remplace
      */
     public void setBool(boolean Boolean){
-         theBool=Boolean;
+         value=Boolean;
      }
 
     /**
@@ -48,6 +53,12 @@ public class ScrabBoolean implements Slogic{
     public ScrabString toScrabString() {
         return new ScrabString(toString());
     }
+
+    /**
+     * copies the ScrabBoolean
+     * @return a new ScrabBoolean
+     */
+    public ScrabBoolean toScrabBoolean(){return new ScrabBoolean(getBool());}
 
     /**
      * negates the value of the ScrabBoolean
@@ -134,7 +145,7 @@ public class ScrabBoolean implements Slogic{
      */
     @Override
     public int hashCode() {
-        return Objects.hash(theBool);
+        return Objects.hash(value);
     }
 
     /** check if the object is equal
@@ -148,5 +159,15 @@ public class ScrabBoolean implements Slogic{
         if (o == null || getClass() != o.getClass()) return false;
         ScrabBoolean that = (ScrabBoolean) o;
         return getBool() == that.getBool();
+    }
+
+    /**
+     * to evaluate Operations and Constants
+     *
+     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     */
+    @Override
+    public AbstractConstant Eval() {
+        return this;
     }
 }

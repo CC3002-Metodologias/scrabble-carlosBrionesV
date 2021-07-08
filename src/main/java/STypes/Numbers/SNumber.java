@@ -1,37 +1,11 @@
-package classes;
+package STypes.Numbers;
+
+import STypes.ScrabType;
 
 /**
  * interface for ScrabBinary and ScrabInt
  */
-public interface SNumber{
-
-    /**
-     * Method for addition
-     * @param scrab a ScrabInt or a ScrabBinary
-     * @return a SNumber
-     */
-    SNumber add(SNumber scrab);
-
-    /**
-     * Method for subtraction
-     * @param scrab a ScrabInt or a ScrabBinary
-     * @return a ScrabFloat
-     */
-    SNumber minus(SNumber scrab);
-
-    /**
-     * Method for multiplication
-     * @param scrab a ScrabInt or a ScrabBinary
-     * @return a ScrabFloat
-     */
-    SNumber mult(SNumber scrab);
-
-    /**
-     * Method for division
-     * @param scrab a ScrabInt or a ScrabBinary
-     * @return a ScrabFloat
-     */
-    SNumber div(SNumber scrab);
+public interface SNumber extends ScrabType {
 
     /**
      * add a SNumber with a ScrabFloats
@@ -88,32 +62,4 @@ public interface SNumber{
      * @return a new SNumber with the values subtracted
      */
     SNumber minusInt(ScrabInt scrabInt);
-
-    /**
-     * add a SNumber with a ScrabBinary
-     * @param binary the ScrabBinary to add
-     * @return a new ScrabBinary with the values added
-     */
-    ScrabBinary addBinary(ScrabBinary binary);
-
-    /**
-     * multiplies a SNumber with a ScrabBinary
-     * @param binary the ScrabBinary to multiply
-     * @return a new ScrabBinary with the values multiplied
-     */
-    ScrabBinary multBinary(ScrabBinary binary);
-
-    /**
-     * divides a SNumber with a ScrabBinary
-     * @param binary the ScrabBinary to divide
-     * @return a new ScrabBinary with the values divided
-     */
-    ScrabBinary divBinary(ScrabBinary binary);
-
-    /**
-     * subtracts a SNumber with a ScrabBinary
-     * @param binary the ScrabBinary to subtract
-     * @return a new ScrabBinary with the values subtracted
-     */
-    ScrabBinary minusBinary(ScrabBinary binary);
 }
