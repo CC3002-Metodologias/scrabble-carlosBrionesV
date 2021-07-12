@@ -1,9 +1,11 @@
 package operands;
 
-import AST.Operation;
 import STypes.Numbers.ScrabBinary;
 import STypes.ScrabType;
 
+/**
+ * interface for ScrabTypes that can operate with binarys
+ */
 public interface BinaryOperand extends ScrabType {
 
     /**

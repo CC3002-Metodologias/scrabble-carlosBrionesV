@@ -1,7 +1,11 @@
 package STypes.Numbers;
 
-import AST.Operations.AbstractConstant;
+
+import AST.Operation;
+import AST.ScrabFactory;
+import STypes.AbstracType;
 import STypes.ScrabString;
+import STypes.ScrabType;
 
 import java.util.Objects;
 
@@ -10,14 +14,16 @@ import static java.lang.StrictMath.abs;
 /**
  * Scrabble Float class
  */
-public class ScrabFloat extends AbstractConstant implements SNumber {
+public class ScrabFloat extends AbstracType implements SNumber {
     double value;
+    ScrabFactory factory;
 
     /**
      * constructor of ScrabFloat class
      * @param d the double value
      */
-    public ScrabFloat(double d){
+    public ScrabFloat(double d,ScrabFactory factory){
+        this.factory=factory;
         value=d;
     }
 
@@ -43,19 +49,22 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
      * @return a Scrabble String representing the Scrabble Double
      */
     public ScrabString toScrabString(){
-        return new ScrabString(toString());
+        return factory.createString(toString());
     }
 
     /**
      * copies the ScrabFloat
      * @return a new ScrabFloat
      */
-    public ScrabFloat toScrabFloat(){return new ScrabFloat(getFloat());}
+    public ScrabFloat toScrabFloat(){return factory.createFloat(getFloat());}
 
     /**
      * negates the value of the ScrabFloat
+     * @return a new ScrabFloat
      */
-    public void neg(){value=-getFloat();}
+    public ScrabFloat neg(){
+        return factory.createFloat(-getFloat());
+    }
 
     /**
      * {@inheritDoc}
@@ -101,7 +110,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat addInt(ScrabInt scrabInt) {
         double f1 = getFloat();
         double f2 =scrabInt.toFloat();
-        return new ScrabFloat(f1+f2);
+        return factory.createFloat(f1+f2);
     }
 
     /**
@@ -112,7 +121,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat multInt(ScrabInt scrabInt) {
         double f1 = getFloat();
         double f2 =scrabInt.toFloat();
-        return new ScrabFloat(f1*f2);
+        return factory.createFloat(f1 * f2);
     }
 
     /**
@@ -123,7 +132,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat divInt(ScrabInt scrabInt) {
         double f1 = getFloat();
         double f2 =scrabInt.toFloat();
-        return new ScrabFloat(f2/f1);
+        return factory.createFloat(f2 / f1);
     }
 
     /**
@@ -134,7 +143,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat minusInt(ScrabInt scrabInt) {
         double f1 = getFloat();
         double f2 =scrabInt.toFloat();
-        return new ScrabFloat(f2-f1);
+        return factory.createFloat(f2 - f1);
     }
 
     /**
@@ -145,7 +154,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat addFloat(ScrabFloat scrabFloat) {
         double f1 = getFloat();
         double f2 =scrabFloat.getFloat();
-        return new ScrabFloat(f1+f2);
+        return factory.createFloat(f1 + f2);
     }
 
     /**
@@ -156,7 +165,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat multFloat(ScrabFloat scrabFloat) {
         double f1 = getFloat();
         double f2 =scrabFloat.getFloat();
-        return new ScrabFloat(f1*f2);
+        return factory.createFloat(f1 * f2);
     }
 
     /**
@@ -167,7 +176,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat divFloat(ScrabFloat scrabFloat) {
         double f1 = getFloat();
         double f2 =scrabFloat.getFloat();
-        return new ScrabFloat(f2/f1);
+        return factory.createFloat(f2 / f1);
     }
 
     /**
@@ -178,7 +187,7 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
     public ScrabFloat minusFloat(ScrabFloat scrabFloat) {
         double f1 = getFloat();
         double f2 =scrabFloat.getFloat();
-        return new ScrabFloat(f2-f1);
+        return factory.createFloat(f2 - f1);
     }
 
     /**
@@ -200,6 +209,63 @@ public class ScrabFloat extends AbstractConstant implements SNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScrabFloat that = (ScrabFloat) o;
-        return abs(that.value - value) < 0.01;
+        return (abs(that.value - value))<0.001;
     }
+
+
+
+    /**
+     * addition operation
+     *
+     * @param cons number constant
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Add(Operation cons) {
+        return this.add((SNumber) cons);
+    }
+
+    /**
+     * subtraction operation
+     *
+     * @param cons number ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public SNumber Minus(Operation cons) {
+        return this.minus((SNumber) cons);
+    }
+
+    /**
+     * division operation
+     *
+     * @param cons Number ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public SNumber Div(Operation cons) {
+        return this.div((SNumber)cons);
+    }
+
+    /**
+     * miltiplication operation
+     *
+     * @param cons Number ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public SNumber Mult(Operation cons) {
+        return this.mult((SNumber) cons);
+    }
+
+    /**
+     * negation operation
+     *
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Neg() {
+        return this.neg();
+    }
+
 }

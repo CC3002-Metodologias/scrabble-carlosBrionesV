@@ -1,8 +1,12 @@
 package AST.Operations;
 
 import AST.Operation;
-import STypes.Numbers.SNumber;
+import STypes.ScrabType;
 
+
+/**
+ * Minus class for AST
+ */
 public class Minus implements Operation {
     Operation minus1;
     Operation minus2;
@@ -12,20 +16,18 @@ public class Minus implements Operation {
      * @param minus1 Logic Operation 
      * @param minus2 Logic Operation
      */
-    Minus(SNumber minus1, SNumber minus2){
+    public Minus(Operation minus1, Operation minus2){
         this.minus1 =minus1;
         this.minus2= minus2;
     }
 
-
-
     /**
      * to evaluate Operations and Constants
      *
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @return a ScrabType with the value of the Operation or ScrabType
      */
     @Override
-    public AbstractConstant Eval() {
-        return (AbstractConstant) minus1.Eval().minus((SNumber) minus2.Eval());
+    public ScrabType Eval() {
+        return minus1.Eval().Minus(minus2.Eval());
     }
 }

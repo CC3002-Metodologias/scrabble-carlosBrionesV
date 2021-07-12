@@ -1,8 +1,7 @@
 package classes;
 
+import AST.ScrabFactory;
 import STypes.Numbers.ScrabFloat;
-import STypes.Numbers.ScrabInt;
-import STypes.ScrabString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +13,7 @@ class ScrabFloatTest {
     private ScrabFloat Float;
     private int operator;
     private double FloatValue;
+    private final ScrabFactory factory = new ScrabFactory();
 
     @BeforeEach
     void setUp(){
@@ -21,87 +21,87 @@ class ScrabFloatTest {
         Random rng = new Random(seed);
         FloatValue= rng.nextInt()*1.0;
         operator = rng.nextInt();
-        Float = new ScrabFloat(FloatValue);
+        Float = factory.createFloat(FloatValue);
     }
 
     @Test
     void testConstructor(){
-        var expected = new ScrabFloat(FloatValue);
+        var expected = factory.createFloat(FloatValue);
         assertEquals(expected, Float);
     }
 
     @Test
     void testtoScrabString(){
         var str = Float.toScrabString();
-        var expected = new ScrabString(String.valueOf(FloatValue));
+        var expected = factory.createString(String.valueOf(FloatValue));
         assertEquals(expected,str);
     }
 
     @Test
     void TestNeg(){
-        var expected = new ScrabFloat(-FloatValue);
-        Float.neg();
+        var expected = factory.createFloat(-FloatValue);
+        Float=Float.neg();
         assertEquals(expected,Float);
 
     }
 
     @Test
     void TestAddBinary(){
-        var expected = new ScrabFloat(FloatValue+operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createFloat(FloatValue+operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Float.add(Soperator));
     }
 
     @Test
     void TestaddInt(){
-        var expected = new ScrabFloat(FloatValue+operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createFloat(FloatValue+operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Float.add(Soperator));
     }
 
     @Test
     void TestaddFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(FloatValue+noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(FloatValue+noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Float.add(Soperator));
     }
 
     @Test
     void TestMultBinary(){
 
-        var expected = new ScrabFloat(FloatValue*operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createFloat(FloatValue*operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Float.mult(Soperator));
 
     }
 
     @Test
     void TestMulInt(){
-        var expected = new ScrabFloat(FloatValue*operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createFloat(FloatValue*operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Float.mult(Soperator));
     }
 
     @Test
     void TestMultFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(FloatValue*noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(FloatValue*noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Float.mult(Soperator));
     }
 
     @Test
     void TestDivBinary(){
-        var expected = new ScrabFloat(FloatValue/operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createFloat(FloatValue/operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Float.div(Soperator));
     }
 
     @Test
     void TestDivInt(){
-        var expected = new ScrabFloat(FloatValue/operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createFloat(FloatValue/operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Float.div(Soperator));
 
     }
@@ -109,22 +109,22 @@ class ScrabFloatTest {
     @Test
     void TestDivFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(FloatValue/noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(FloatValue/noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Float.div(Soperator));
     }
 
     @Test
     void TestMinusBinary(){
-        var expected = new ScrabFloat(FloatValue-operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createFloat(FloatValue-operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Float.minus(Soperator));
     }
 
     @Test
     void TestMinusInt(){
-        var expected = new ScrabFloat(FloatValue-operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createFloat(FloatValue-operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Float.minus(Soperator));
 
     }
@@ -132,16 +132,16 @@ class ScrabFloatTest {
     @Test
     void TestMinusFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(FloatValue-noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(FloatValue-noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Float.minus(Soperator));
     }
 
     
     @Test
     void TestHashCode(){
-        var expected = new ScrabFloat(FloatValue);
-        var unexpected = new ScrabFloat(9.8);
+        var expected = factory.createFloat(FloatValue);
+        var unexpected = factory.createFloat(9.8);
         assertEquals(expected.hashCode(),Float.hashCode());
         assertNotEquals(unexpected.hashCode(),Float.hashCode());
     }

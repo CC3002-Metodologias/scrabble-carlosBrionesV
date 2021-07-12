@@ -1,5 +1,6 @@
 package classes;
 
+import AST.ScrabFactory;
 import STypes.Numbers.ScrabBinary;
 import STypes.Numbers.ScrabFloat;
 import STypes.Numbers.ScrabInt;
@@ -19,6 +20,8 @@ class ScrabIntTest {
     private ScrabInt Int;
     private int operator;
     private int IntValue;
+    private final ScrabFactory factory = new ScrabFactory();
+
 
     @BeforeEach
     void setUp(){
@@ -26,12 +29,13 @@ class ScrabIntTest {
         Random rng = new Random(seed);
         IntValue= rng.nextInt();
         operator = rng.nextInt();
-        Int = new ScrabInt(IntValue);
+        Int = factory.createInt(IntValue);
+        
     }
 
     @Test
     void testConstructor(){
-        var expected = new ScrabInt(IntValue);
+        var expected = factory.createInt(IntValue);
         assertEquals(expected, Int);
         assertEquals(expected,expected);
     }
@@ -39,7 +43,7 @@ class ScrabIntTest {
     @Test
     void testToScrabString(){
         ScrabString s = Int.toScrabString();
-        var expected = new ScrabString(String.valueOf(IntValue));
+        var expected = factory.createString(String.valueOf(IntValue));
         assertEquals(expected, s);
     }
 
@@ -47,7 +51,7 @@ class ScrabIntTest {
     void testToScrabFloat(){
         double FloatValue = Float.parseFloat(String.valueOf(IntValue));
         ScrabFloat f = Int.toScrabFloat();
-        var expected= new ScrabFloat(FloatValue);
+        var expected= factory.createFloat(FloatValue);
         assertEquals(expected, f);
         assertEquals(expected,expected);
     }
@@ -60,78 +64,76 @@ class ScrabIntTest {
         if (IntValue >= 0) {
             str = String.format("%32s", str).replace(' ', '0');
         }
-        expected=new ScrabBinary(str);
+        expected=factory.createBinary(str);
         var bin = Int.toScrabBinary();
         assertEquals(expected,bin);
     }
 
     @Test
     void TestNeg(){
-        var expected = new ScrabInt(-IntValue);
-        Int.neg();
+        var expected = factory.createInt(-IntValue);
+        Int=Int.neg();
         assertEquals(expected,Int);
 
     }
 
     @Test
     void TestAddBinary(){
-        var expected = new ScrabInt(IntValue+operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createInt(IntValue+operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
 
         assertEquals(expected,Int.add(Soperator));
     }
 
     @Test
     void TestaddInt(){
-        var expected = new ScrabInt(IntValue+operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createInt(IntValue+operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Int.add(Soperator));
     }
 
     @Test
     void TestaddFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(IntValue+noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(IntValue+noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Int.add(Soperator));
     }
 
     @Test
     void TestMultBinary(){
-        System.out.print("lo que se opera: "+operator+'\n');
-        System.out.print("a lo que se opera: "+Int+'\n');
-        var expected = new ScrabInt(IntValue*operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createInt(IntValue*operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Int.mult(Soperator));
 
     }
 
     @Test
     void TestMulInt(){
-        var expected = new ScrabInt(IntValue*operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createInt(IntValue*operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Int.mult(Soperator));
     }
 
     @Test
     void TestMultFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(IntValue*noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(IntValue*noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Int.mult(Soperator));
     }
 
     @Test
     void TestDivBinary(){
-        var expected = new ScrabInt(IntValue/operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createInt(IntValue/operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Int.div(Soperator));
     }
 
     @Test
     void TestDivInt(){
-        var expected = new ScrabInt(IntValue/operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createInt(IntValue/operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Int.div(Soperator));
 
     }
@@ -139,25 +141,22 @@ class ScrabIntTest {
     @Test
     void TestDivFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(IntValue/noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(IntValue/noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Int.div(Soperator));
     }
 
     @Test
     void TestMinusBinary(){
-
-        System.out.print("lo que se opera: "+operator+'\n');
-        System.out.print("a lo que se opera: "+Int+'\n');
-        var expected = new ScrabInt(IntValue-operator);
-        var Soperator= new ScrabInt(operator).toScrabBinary();
+        var expected = factory.createInt(IntValue-operator);
+        var Soperator= factory.createInt(operator).toScrabBinary();
         assertEquals(expected,Int.minus(Soperator));
     }
 
     @Test
     void TestMinusInt(){
-        var expected = new ScrabInt(IntValue-operator);
-        var Soperator= new ScrabInt(operator);
+        var expected = factory.createInt(IntValue-operator);
+        var Soperator= factory.createInt(operator);
         assertEquals(expected,Int.minus(Soperator));
 
     }
@@ -165,15 +164,15 @@ class ScrabIntTest {
     @Test
     void TestMinusFloat(){
         var noperator = operator*1.0;
-        var expected = new ScrabFloat(IntValue-noperator);
-        var Soperator= new ScrabFloat(noperator);
+        var expected = factory.createFloat(IntValue-noperator);
+        var Soperator= factory.createFloat(noperator);
         assertEquals(expected,Int.minus(Soperator));
     }
 
     @Test
     void TestHashCode(){
-        var expected = new ScrabInt(IntValue);
-        var unexpected = new ScrabInt(76);
+        var expected = factory.createInt(IntValue);
+        var unexpected = factory.createInt(76);
         assertEquals(expected.hashCode(),Int.hashCode());
         assertNotEquals(unexpected.hashCode(),Int.hashCode());
     }

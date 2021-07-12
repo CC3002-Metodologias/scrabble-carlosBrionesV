@@ -1,6 +1,9 @@
 package STypes.Numbers;
 
-import AST.Operations.AbstractConstant;
+
+import AST.Operation;
+import AST.ScrabFactory;
+import STypes.AbstracType;
 import STypes.ScrabType;
 import operands.BinaryOperand;
 import operands.Slogic;
@@ -12,15 +15,17 @@ import java.util.Objects;
 /**
  * Scrabble Binary class
  */
-public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slogic, SNumber {
+public class ScrabBinary extends AbstracType implements BinaryOperand, Slogic, SNumber {
     String value;
+    ScrabFactory factory;
 
     /** constructor of class ScrabBinary
      *
      * @param bin String of 0s and 1s if its length is  less than 32 bit
      *            it will be filled with 1s or 0s
      */
-    public ScrabBinary(String bin){
+    public ScrabBinary(String bin, ScrabFactory factory){
+        this.factory=factory;
         var str = new StringBuilder(bin);
             str.reverse();
             if (bin.charAt(0)=='0') {
@@ -50,7 +55,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      * @param bin the binary string to remplace
      */
     public void setBin(String bin){
-        value=new ScrabBinary(bin).toString();
+        value=factory.createBinary(bin).getBin();
     }
 
     /**
@@ -67,14 +72,14 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      * @return a Scrabble String representing the ScrabBinary
      */
     public ScrabString toScrabString(){
-        return new ScrabString(toString());
+        return factory.createString(toString());
     }
 
     /**
      * copies the ScrabBinary
      * @return a new ScrabBinary
      */
-    public ScrabBinary toScrabBinary(){return new ScrabBinary(toString());}
+    public ScrabBinary toScrabBinary(){return factory.createBinary(toString());}
 
     /**
      * turns a binary String into a int
@@ -130,7 +135,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      * @return the ScrabInt representation of the ScrabBinary
      */
     public ScrabInt toScrabInt(){
-         return new ScrabInt(toInt(getBin()));
+         return factory.createInt(toInt(getBin()));
     }
 
     /**
@@ -146,7 +151,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      * @return the ScrabFloat representation of the ScrabBinary
      */
     public ScrabFloat toScrabFloat(){
-        return new ScrabFloat(toFloat());
+        return factory.createFloat(toFloat());
     }
 
     /**
@@ -154,7 +159,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      * @return a ScrabBinary representing the twos complement of the current ScrabBinary
      */
     public ScrabBinary twosComplement(){
-         String str = getBin().replace('0','2').replace('1','0').replace('2','1');
+         String str = this.neg().getBin();
          StringBuilder sum = new StringBuilder();
          int carry=1;
          for(int i = 31; i>=0; i--){
@@ -164,16 +169,16 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
              carry = add / 2;
          }
 
-        return new ScrabBinary(sum.reverse().toString());
+        return factory.createBinary(sum.reverse().toString());
     }
 
     /**
      * negates each bit of the ScrabBinary
      */
-    public void neg(){
+    public ScrabBinary neg(){
         String str = getBin();
         str = str.replace('0','2').replace('1','0').replace('2','1');
-        setBin(str);
+        return factory.createBinary(str);
     }
 
     /**
@@ -220,7 +225,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabBinary addBinary(ScrabBinary binary) {
         int i1=toInt(getBin());
         int i2=toInt(binary.getBin());
-        var si=new ScrabInt(i1+i2);
+        var si=factory.createInt(i1+i2);
         return si.toScrabBinary();
     }
 
@@ -232,7 +237,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabBinary multBinary(ScrabBinary binary){
         int i1 = toInt(getBin());
         int i2 = toInt(binary.getBin());
-        ScrabInt si = new ScrabInt(i1*i2);
+        ScrabInt si = factory.createInt(i1*i2);
 
 
         return si.toScrabBinary();
@@ -247,7 +252,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabBinary divBinary(ScrabBinary binary){
         int i1 = toInt(getBin());
         int i2 = toInt(binary.getBin());
-        ScrabInt si = new ScrabInt(i2/i1);
+        ScrabInt si = factory.createInt(i2/i1);
         return si.toScrabBinary();
 
     }
@@ -260,7 +265,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabBinary minusBinary(ScrabBinary binary){
         int i1 = toInt(getBin());
         int i2 = toInt(binary.getBin());
-        ScrabInt si = new ScrabInt(i2-i1);
+        ScrabInt si = factory.createInt(i2-i1);
         return si.toScrabBinary();
     }
 
@@ -272,7 +277,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabInt addInt(ScrabInt Int) {
         int i1 = toInt(getBin());
         int i2 = Int.getInt();
-        return new ScrabInt(i1+i2);
+        return factory.createInt(i1+i2);
     }
 
     /**
@@ -283,8 +288,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabInt multInt(ScrabInt Int){
         int i1 = toInt(getBin());
         int i2 = Int.getInt();
-        System.out.print("binMultInt i1= "+i1+" i2= "+i2+'\n');
-        return new ScrabInt(i1*i2);
+        return factory.createInt(i1*i2);
     }
 
     /**
@@ -296,7 +300,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
         int i1 = toInt(getBin());
         int i2 = Int.getInt();
 
-        return new ScrabInt(i2/i1);
+        return factory.createInt(i2/i1);
 
     }
 
@@ -308,7 +312,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabInt minusInt(ScrabInt Int){
         int i1 = toInt(getBin());
         int i2 = Int.getInt();
-        return new ScrabInt(i2-i1);
+        return factory.createInt(i2-i1);
     }
 
     /**
@@ -317,7 +321,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabFloat addFloat(ScrabFloat Float) {
         double f1 = toFloat();
         double f2 =Float.getFloat();
-        return new ScrabFloat(f1+f2);
+        return factory.createFloat(f1+f2);
     }
 
     /**
@@ -326,7 +330,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabFloat multFloat(ScrabFloat Float) {
         double f1 = toFloat();
         double f2 =Float.getFloat();
-        return new ScrabFloat(f1*f2);
+        return factory.createFloat(f1*f2);
     }
 
     /**
@@ -335,7 +339,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabFloat divFloat(ScrabFloat Float) {
         double f1 = toFloat();
         double f2 =Float.getFloat();
-        return new ScrabFloat(f2/f1);
+        return factory.createFloat(f2/f1);
     }
 
     /**
@@ -346,7 +350,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
     public ScrabFloat minusFloat(ScrabFloat Float) {
         double f1 = toFloat();
         double f2 =Float.getFloat();
-        return new ScrabFloat(f2-f1);
+        return factory.createFloat(f2-f1);
     }
 
     /**
@@ -372,10 +376,10 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      */
     public ScrabBinary andBool(ScrabBoolean bool) {
         if(bool.getBool()){
-            return new ScrabBinary(getBin());
+            return factory.createBinary(getBin());
         }
         else{
-            return new ScrabBinary("000");
+            return factory.createBinary("000");
         }
     }
 
@@ -397,7 +401,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
                 str.append(0);
             }
         }
-        return new ScrabBinary(str.reverse().toString());
+        return factory.createBinary(str.reverse().toString());
     }
 
     /**
@@ -407,10 +411,10 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
      */
     public ScrabBinary orBool(ScrabBoolean bool) {
         if (bool.getBool()){
-            return new ScrabBinary("1111");
+            return factory.createBinary("1111");
         }
         else{
-            return new ScrabBinary(getBin());
+            return factory.createBinary(getBin());
         }
     }
 
@@ -432,7 +436,7 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
                 str.append(0);
             }
         }
-        return new ScrabBinary(str.toString());
+        return factory.createBinary(str.toString());
     }
 
     /**
@@ -457,13 +461,82 @@ public class ScrabBinary extends AbstractConstant implements BinaryOperand, Slog
         return Objects.equals(value, that.value);
     }
 
+
+
+
     /**
-     * to evaluate Operations and Constants
+     * logic operation and
      *
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @param cons Logic ScrabType
+     * @return ScrabType with the result
      */
     @Override
-    public AbstractConstant Eval() {
-        return this;
+    public Slogic And(Operation cons) {
+        return this.and((Slogic)cons);
     }
+
+    /**
+     * logic operation or
+     *
+     * @param cons Logic ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public Slogic Or(Operation cons) {
+        return this.or((Slogic)cons);
+    }
+
+    /**
+     * addition operation
+     *
+     * @param cons number constant
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Add(Operation cons) {
+        return this.add((BinaryOperand) cons);
+    }
+    /**
+     * subtraction operation
+     *
+     * @param cons number ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Minus(Operation cons) {
+        return this.minus((BinaryOperand) cons);
+    }
+
+    /**
+     * division operation
+     *
+     * @param cons Number ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Div(Operation cons) {
+        return this.div((BinaryOperand) cons);
+    }
+
+    /**
+     * miltiplication operation
+     *
+     * @param cons Number ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Mult(Operation cons) {
+        return this.mult((BinaryOperand) cons);
+    }
+
+    /**
+     * negation operation
+     *
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Neg() {
+        return this.neg();
+    }
+
 }

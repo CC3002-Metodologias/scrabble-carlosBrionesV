@@ -1,7 +1,7 @@
 package STypes;
 
-import AST.Operations.AbstractConstant;
 import AST.Operation;
+import AST.ScrabFactory;
 import operands.Slogic;
 import STypes.Numbers.ScrabBinary;
 
@@ -10,14 +10,16 @@ import java.util.Objects;
 /**
  * ScrabBoolean Class
  */
-public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType, Operation {
+public class ScrabBoolean extends AbstracType implements Slogic, ScrabType {
     boolean value;
+    ScrabFactory factory;
 
     /**
      * constructor of class ScrabBoolean
      * @param b the boolean value
      */
-    public ScrabBoolean(boolean b){
+    public ScrabBoolean(boolean b,ScrabFactory factory){
+        this.factory=factory;
         value=b;
     }
 
@@ -51,14 +53,14 @@ public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType,
      * @return a Scrabble String representing the Scrabble Boolean
      */
     public ScrabString toScrabString() {
-        return new ScrabString(toString());
+        return factory.createString(toString());
     }
 
     /**
      * copies the ScrabBoolean
      * @return a new ScrabBoolean
      */
-    public ScrabBoolean toScrabBoolean(){return new ScrabBoolean(getBool());}
+    public ScrabBoolean toScrabBoolean(){return factory.createBoolean(getBool());}
 
     /**
      * negates the value of the ScrabBoolean
@@ -91,10 +93,10 @@ public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType,
      */
     public ScrabBoolean andBool(ScrabBoolean bool) {
         if(bool.getBool() && getBool()){
-            return new ScrabBoolean(true);
+            return factory.createBoolean(true);
         }
         else{
-            return new ScrabBoolean(false);
+            return factory.createBoolean(false);
         }
     }
 
@@ -103,12 +105,12 @@ public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType,
      * @return a ScrabBoolean with the result
      */
     public ScrabBinary andBinary(ScrabBinary binary) {
-        ScrabBinary sb = new ScrabBinary("01010");
+        ScrabBinary sb = factory.createBinary("01010");
         if(getBool()){
-            sb= new ScrabBinary(binary.getBin());
+            sb= factory.createBinary(binary.getBin());
         }
         else if(!getBool()){
-            sb= new ScrabBinary("000");
+            sb= factory.createBinary("000");
         }
         return sb;
     }
@@ -119,10 +121,10 @@ public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType,
      */
     public ScrabBoolean orBool(ScrabBoolean bool) {
         if (bool.getBool() || getBool()){
-            return new ScrabBoolean(true);
+            return factory.createBoolean(true);
         }
         else{
-            return new ScrabBoolean(false);
+            return factory.createBoolean(false);
         }
     }
 
@@ -132,10 +134,10 @@ public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType,
      */
     public ScrabBinary orBinary(ScrabBinary binary) {
         if (getBool()){
-            return new ScrabBinary("1111");
+            return factory.createBinary("1111");
         }
         else{
-            return new ScrabBinary(binary.getBin());
+            return factory.createBinary(binary.getBin());
         }
     }
 
@@ -161,13 +163,33 @@ public class ScrabBoolean extends AbstractConstant implements Slogic, ScrabType,
         return getBool() == that.getBool();
     }
 
+
     /**
-     * to evaluate Operations and Constants
+     * logic operation and for AST
      *
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @param cons Logic ScrabType
+     * @return ScrabType with the result
      */
     @Override
-    public AbstractConstant Eval() {
-        return this;
+    public Slogic And(Operation cons) {
+        return this.and((Slogic)cons);
     }
+
+    /**
+     * logic operation or for AST
+     *
+     * @param cons Logic ScrabType
+     * @return ScrabType with the result
+     */
+    @Override
+    public Slogic Or(Operation cons) {
+        return this.or((Slogic)cons);
+    }
+
+
+
+
+
+
+
 }

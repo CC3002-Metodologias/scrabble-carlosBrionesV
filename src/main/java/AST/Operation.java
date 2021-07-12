@@ -1,12 +1,16 @@
 package AST;
 
-import AST.Operations.AbstractConstant;
 
+import STypes.ScrabType;
+
+/**
+ * common interface for AST
+ */
 public interface Operation {
 
     /**
      * to evaluate Operations and Constants
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @return a ScrabType with the value of the Operation or ScrabType
      */
-    AbstractConstant Eval();
+    ScrabType Eval();
 }

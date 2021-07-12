@@ -1,5 +1,6 @@
 package classes;
 
+import AST.ScrabFactory;
 import STypes.Numbers.ScrabBinary;
 import STypes.ScrabBoolean;
 import STypes.ScrabString;
@@ -15,37 +16,38 @@ class ScrabBooleanTest {
     private final boolean boolValue = true;
     private String binValue;
     private ScrabBinary bin;
+    private final ScrabFactory factory = new ScrabFactory();
 
 
     @BeforeEach
     void setUp() {
         binValue="";
-        Bool=new ScrabBoolean(boolValue);
+        Bool=factory.createBoolean(boolValue);
         int seed = new Random().nextInt();
         Random rng = new Random(seed);
         for (int i = 0; i< 31; i++){
             int n = rng.nextInt(2);
             binValue = binValue.concat(Integer.toString(n));
         }
-        bin = new ScrabBinary(binValue);
+        bin = factory.createBinary(binValue);
     }
 
     @Test
     void testConstructor(){
-        var expected = new ScrabBoolean(boolValue);
+        var expected = factory.createBoolean(boolValue);
         assertEquals(expected, Bool);
     }
     @Test
     void testToScrabString(){
         ScrabString s = Bool.toScrabString();
         String value2 = "true";
-        var expected = new ScrabString(value2);
+        var expected = factory.createString(value2);
         assertEquals(expected, s);
     }
 
     @Test
     void TestNeg(){
-        var expected=new ScrabBoolean(!boolValue);
+        var expected=factory.createBoolean(!boolValue);
         Bool.neg();
         assertEquals(expected,Bool);
 
@@ -53,13 +55,13 @@ class ScrabBooleanTest {
 
     @Test
     void TestAndBool(){
-        var op = new ScrabBoolean(true);
+        var op = factory.createBoolean(true);
         var bool2=Bool.and(op);
-        var expected= new ScrabBoolean(true);
+        var expected= factory.createBoolean(true);
         assertEquals(expected,bool2);
 
         Bool.neg();
-        expected= new ScrabBoolean(false);
+        expected= factory.createBoolean(false);
         bool2=Bool.and(op);
         assertEquals(expected,bool2);
     }
@@ -67,47 +69,47 @@ class ScrabBooleanTest {
     @Test
     void TestAndBinary(){
         //bool true
-        var expected= new ScrabBinary(binValue);
+        var expected= factory.createBinary(binValue);
         var bin2=Bool.and(bin);
         assertEquals(expected,bin2);
 
         Bool.neg();
-        expected= new ScrabBinary("00");
+        expected= factory.createBinary("00");
         bin2=Bool.and(bin);
         assertEquals(expected,bin2);
     }
 
     @Test
     void TestOrBool(){
-        var op = new ScrabBoolean(true);
+        var op = factory.createBoolean(true);
         var bool2=Bool.or(op);
-        var expected= new ScrabBoolean(true);
+        var expected= factory.createBoolean(true);
         assertEquals(expected,bool2);
 
         System.out.print("aaaaaaaaaaaaan\n");
         Bool.neg();
-        op= new ScrabBoolean(false);
-        expected= new ScrabBoolean(false);
+        op= factory.createBoolean(false);
+        expected= factory.createBoolean(false);
         bool2=Bool.or(op);
         assertEquals(expected,bool2);
     }
 
     @Test
     void TestOrBinary(){
-        var expected= new ScrabBinary("11");
+        var expected= factory.createBinary("11");
         var bin2=Bool.or(bin);
         assertEquals(expected,bin2);
 
         Bool.neg();
-        expected= new ScrabBinary(binValue);
+        expected= factory.createBinary(binValue);
         bin2=Bool.or(bin);
         assertEquals(expected,bin2);
     }
 
     @Test
     void TestHashCode(){
-        var expected = new ScrabBoolean(boolValue);
-        var unexpected = new ScrabBoolean(false);
+        var expected = factory.createBoolean(boolValue);
+        var unexpected = factory.createBoolean(false);
         assertEquals(expected.hashCode(),Bool.hashCode());
         assertNotEquals(unexpected.hashCode(),Bool.hashCode());
     }

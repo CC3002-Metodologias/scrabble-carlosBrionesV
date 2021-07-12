@@ -1,8 +1,12 @@
 package AST.Operations;
 
 import AST.Operation;
+import STypes.ScrabType;
 import operands.Slogic;
 
+/**
+ * And class for AST
+ */
 public class And implements Operation {
     Operation and1;
     Operation and2;
@@ -12,7 +16,7 @@ public class And implements Operation {
      * @param and1 Logic Operation
      * @param and2 Logic Operation
      */
-    And(Slogic and1, Slogic and2){
+    public And(Operation and1, Operation and2){
         this.and1 =and1;
         this.and2= and2;
     }
@@ -20,10 +24,10 @@ public class And implements Operation {
     /**
      * to evaluate Operations and Constants
      *
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @return a ScrabType with the value of the Operation or ScrabType
      */
     @Override
-    public AbstractConstant Eval() {
-        return (AbstractConstant) and1.Eval().and((Slogic) and2.Eval());
+    public ScrabType Eval() {
+        return  and1.Eval().And( and2.Eval());
     }
 }

@@ -2,7 +2,11 @@ package AST.Operations;
 
 import AST.Operation;
 import STypes.Numbers.SNumber;
+import STypes.ScrabType;
 
+/**
+ * Mult class for AST
+ */
 public class Mult implements Operation {
     Operation mult1;
     Operation mult2;
@@ -12,7 +16,7 @@ public class Mult implements Operation {
      * @param mult1 Logic Operation 
      * @param mult2 Logic Operation
      */
-    Mult(SNumber mult1, SNumber mult2){
+    public Mult(Operation mult1, Operation mult2){
         this.mult1 =mult1;
         this.mult2= mult2;
     }
@@ -20,10 +24,10 @@ public class Mult implements Operation {
     /**
      * to evaluate Operations and Constants
      *
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @return a ScrabType with the value of the Operation or ScrabType
      */
     @Override
-    public AbstractConstant Eval() {
-        return (AbstractConstant) mult1.Eval().mult((SNumber) mult2.Eval());
+    public ScrabType Eval() {
+        return mult1.Eval().Mult( mult2.Eval());
     }
 }

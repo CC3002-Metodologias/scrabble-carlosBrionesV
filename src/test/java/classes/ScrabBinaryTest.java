@@ -1,6 +1,7 @@
 package classes;
 
 
+import AST.ScrabFactory;
 import STypes.Numbers.ScrabBinary;
 import STypes.Numbers.ScrabFloat;
 import STypes.Numbers.ScrabInt;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import STypes.ScrabBoolean;
 import STypes.ScrabString;
 import java.util.Random;
 
@@ -19,6 +19,7 @@ class ScrabBinaryTest {
     private ScrabBinary bin;
     private String binValue;
     private String operator;
+    private final ScrabFactory factory = new ScrabFactory();
 
     @BeforeEach
     void setUp(){
@@ -32,21 +33,21 @@ class ScrabBinaryTest {
             operator = operator.concat(Integer.toString(m));
             binValue = binValue.concat(Integer.toString(n));
         }
-        bin = new ScrabBinary(binValue);
+        bin = factory.createBinary(binValue);
     }
 
     @Test
     void TestConstructor(){
-        var expected = new ScrabBinary(binValue);
+        var expected = factory.createBinary(binValue);
         assertEquals(expected,bin);
     }
 
     @RepeatedTest(10)
     void TestToScrabString(){
         ScrabString s = bin.toScrabString();
-        ScrabString expected=new ScrabString("1"+binValue);
+        ScrabString expected=factory.createString("1"+binValue);
         if (binValue.charAt(0)=='0') {
-            expected = new ScrabString(String.format("%32s", binValue).replace(' ', '0'));
+            expected = factory.createString(String.format("%32s", binValue).replace(' ', '0'));
         }
         assertEquals(expected, s);
     }
@@ -55,10 +56,10 @@ class ScrabBinaryTest {
     void TestToScrabInt(){
         ScrabInt expected;
         if (binValue.charAt(0)=='1'){
-            expected = new ScrabInt(Integer.parseInt("-"+binValue,2));
+            expected = factory.createInt(Integer.parseInt("-"+binValue,2));
         }
         else {
-            expected = new ScrabInt(Integer.parseInt(binValue, 2));
+            expected = factory.createInt(Integer.parseInt(binValue, 2));
         }
         ScrabInt Int = bin.toScrabInt();
     assertEquals(expected,Int);
@@ -70,11 +71,11 @@ class ScrabBinaryTest {
     void TestToScrabFloat(){
         ScrabFloat expected;
         if (binValue.charAt(0)=='1'){
-            expected = new ScrabInt(Integer.parseInt("-"+binValue,2)).toScrabFloat();
+            expected = factory.createInt(Integer.parseInt("-"+binValue,2)).toScrabFloat();
 
         }
         else {
-            expected = new ScrabInt(Integer.parseInt(binValue, 2)).toScrabFloat();
+            expected = factory.createInt(Integer.parseInt(binValue, 2)).toScrabFloat();
         }
         ScrabFloat Float = bin.toScrabFloat();
         assertEquals(expected,Float);
@@ -90,7 +91,7 @@ class ScrabBinaryTest {
         else {
             i1= Integer.parseInt(operator, 2);
         }
-        var op = new ScrabInt(i1);
+        var op = factory.createInt(i1);
 
         if (binValue.charAt(0)=='1'){
             i2= Integer.parseInt("-"+binValue,2);
@@ -98,7 +99,7 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected = new ScrabInt(i2+i1).toScrabBinary();
+        var expected = factory.createInt(i2+i1).toScrabBinary();
 
         assertEquals(expected,bin.add(op));
 
@@ -121,8 +122,8 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected= new ScrabInt(i1+i2).toScrabBinary();
-        var sb=new ScrabBinary(operator);
+        var expected= factory.createInt(i1+i2).toScrabBinary();
+        var sb=factory.createBinary(operator);
         assertEquals(expected,bin.add(sb));
     }
 
@@ -136,7 +137,7 @@ class ScrabBinaryTest {
         else {
             i1= Integer.parseInt(operator, 2);
         }
-        var op = new ScrabInt(i1);
+        var op = factory.createInt(i1);
 
         if (binValue.charAt(0)=='1'){
             i2= Integer.parseInt("-"+binValue,2);
@@ -144,7 +145,7 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected = new ScrabInt(i2*i1).toScrabBinary();
+        var expected = factory.createInt(i2*i1).toScrabBinary();
 
 
         assertEquals(expected,bin.mult(op));
@@ -168,8 +169,8 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected= new ScrabInt(i1*i2).toScrabBinary();
-        var sb=new ScrabBinary(operator);
+        var expected= factory.createInt(i1*i2).toScrabBinary();
+        var sb=factory.createBinary(operator);
         assertEquals(expected,bin.mult(sb));
     }
 
@@ -183,7 +184,7 @@ class ScrabBinaryTest {
         else {
             i1= Integer.parseInt(operator, 2);
         }
-        var op = new ScrabInt(i1);
+        var op = factory.createInt(i1);
 
         if (binValue.charAt(0)=='1'){
             i2= Integer.parseInt("-"+binValue,2);
@@ -191,7 +192,7 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected = new ScrabInt(i1/i2).toScrabBinary();
+        var expected = factory.createInt(i1/i2).toScrabBinary();
 
 
         assertEquals(expected,bin.div(op));
@@ -215,8 +216,8 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected= new ScrabInt(i2/i1).toScrabBinary();
-        var sb=new ScrabBinary(operator);
+        var expected= factory.createInt(i2/i1).toScrabBinary();
+        var sb=factory.createBinary(operator);
         assertEquals(expected,bin.div(sb));
     }
 
@@ -230,7 +231,7 @@ class ScrabBinaryTest {
         else {
             i1= Integer.parseInt(operator, 2);
         }
-        var op = new ScrabInt(i1);
+        var op = factory.createInt(i1);
 
         if (binValue.charAt(0)=='1'){
             i2= Integer.parseInt("-"+binValue,2);
@@ -238,7 +239,7 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected = new ScrabInt(i1-i2).toScrabBinary();
+        var expected = factory.createInt(i1-i2).toScrabBinary();
 
         assertEquals(expected,bin.minus(op));
     }
@@ -260,8 +261,8 @@ class ScrabBinaryTest {
         else {
             i2= Integer.parseInt(binValue, 2);
         }
-        var expected= new ScrabInt(i2-i1).toScrabBinary();
-        var sb=new ScrabBinary(operator);
+        var expected= factory.createInt(i2-i1).toScrabBinary();
+        var sb=factory.createBinary(operator);
         assertEquals(expected,bin.minus(sb));
     }
 
@@ -273,8 +274,8 @@ class ScrabBinaryTest {
     @Test
     void TestNeg(){
         binValue=binValue.replace('0','2').replace('1','0').replace('2','1');
-        var expected=new ScrabBinary(binValue);
-        bin.neg();
+        var expected=factory.createBinary(binValue);
+        bin=bin.neg();
         assertEquals(expected,bin);
     }
 
@@ -282,7 +283,7 @@ class ScrabBinaryTest {
     void TestAndBinary(){
         operator=operator.charAt(0)+operator;
         binValue=binValue.charAt(0)+binValue;
-        ScrabBinary op = new ScrabBinary(operator);
+        ScrabBinary op = factory.createBinary(operator);
         StringBuilder str=new StringBuilder();
         for (int i = 0;i<32;i++){
             if (operator.charAt(i)=='1' && binValue.charAt(i)=='1'){
@@ -290,20 +291,20 @@ class ScrabBinaryTest {
             }
             else{str.append(0);}
         }
-        ScrabBinary expected=new ScrabBinary(str.toString());
+        ScrabBinary expected=factory.createBinary(str.toString());
         bin=bin.and(op);
         assertEquals(expected,bin);
     }
 
     @Test
     void TestAndBool(){
-        var bool = new ScrabBoolean(true);
-        var expected= new ScrabBinary(binValue);
+        var bool = factory.createBoolean(true);
+        var expected= factory.createBinary(binValue);
         var bin2=bin.and(bool);
         assertEquals(expected,bin2);
 
-        bool=new ScrabBoolean(false);
-        expected= new ScrabBinary("00");
+        bool=factory.createBoolean(false);
+        expected= factory.createBinary("00");
         bin2=bin.and(bool);
         assertEquals(expected,bin2);
     }
@@ -312,8 +313,7 @@ class ScrabBinaryTest {
     void TestOrBinary(){
         operator=operator.charAt(0)+operator;
         binValue=binValue.charAt(0)+binValue;
-        System.out.print(operator+"\n"+binValue);
-        ScrabBinary op = new ScrabBinary(operator);
+        ScrabBinary op = factory.createBinary(operator);
         StringBuilder str=new StringBuilder();
         for (int i = 0;i<32;i++){
             if (operator.charAt(i)=='1' || binValue.charAt(i)=='1'){
@@ -323,16 +323,15 @@ class ScrabBinaryTest {
                 str.append(0);
             }
         }
-        ScrabBinary expected=new ScrabBinary(str.toString());
+        ScrabBinary expected=factory.createBinary(str.toString());
         bin=bin.or(op);
         assertEquals(expected,bin);
     }
 
     @Test
     void TestOrBool(){
-        System.out.print("true");
-        var bool = new ScrabBoolean(true);
-        var expected= new ScrabBinary("111");
+        var bool = factory.createBoolean(true);
+        var expected= factory.createBinary("111");
         var bin2=bin.or(bool);
         assertEquals(expected,bin2);
 
@@ -341,8 +340,8 @@ class ScrabBinaryTest {
 
     @Test
     void TestHashCode(){
-        var expected = new ScrabBinary(binValue);
-        var unexpected = new ScrabBinary(binValue+"1");
+        var expected = factory.createBinary(binValue);
+        var unexpected = factory.createBinary(binValue+"1");
         assertEquals(expected.hashCode(),bin.hashCode());
         assertNotEquals(unexpected.hashCode(),bin.hashCode());
     }

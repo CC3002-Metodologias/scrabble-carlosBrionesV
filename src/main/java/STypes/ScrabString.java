@@ -1,20 +1,25 @@
 package STypes;
 
-import AST.Operations.AbstractConstant;
+
+import AST.Operation;
+import AST.ScrabFactory;
+import operands.Slogic;
 
 import java.util.Objects;
 
 /**
  * Scrabble String class
  */
-public class ScrabString extends AbstractConstant implements ScrabType{
+public class ScrabString extends AbstracType implements ScrabType{
     String value;
+    ScrabFactory factory;
 
     /**
      * constructor of ScrabString
      * @param str the String Value
      */
-    public ScrabString(String str){
+    public ScrabString(String str,ScrabFactory factory){
+        this.factory=factory;
         value=str;
     }
 
@@ -32,7 +37,7 @@ public class ScrabString extends AbstractConstant implements ScrabType{
      * @return a new ScrabString
      */
     public ScrabString toScrabString(){
-      return new ScrabString(value);
+      return factory.createString(value);
     }
 
     /**
@@ -41,7 +46,7 @@ public class ScrabString extends AbstractConstant implements ScrabType{
      * @return a new ScrabString concatenating ScrabString+scrab
      */
     public ScrabString add(ScrabType scrab){
-        return new ScrabString(toString()+scrab.toString());
+        return factory.createString(toString()+scrab.toString());
     }
 
     /**
@@ -65,6 +70,18 @@ public class ScrabString extends AbstractConstant implements ScrabType{
         ScrabString that = (ScrabString) o;
         return Objects.equals(toString(), that.toString());
     }
+
+    /**
+     * addition operation for AST
+     *
+     * @param cons number constant
+     * @return ScrabType with the result
+     */
+    @Override
+    public ScrabType Add(Operation cons) {
+        return this.add((ScrabType) cons);
+    }
+
 }
 
 

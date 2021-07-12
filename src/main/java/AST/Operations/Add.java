@@ -2,10 +2,11 @@ package AST.Operations;
 
 import AST.Operation;
 import STypes.ScrabType;
-import operands.Slogic;
 
+/**
+ * Add class for AST
+ */
 public class Add implements Operation {
-
     Operation add1;
     Operation add2;
 
@@ -14,7 +15,7 @@ public class Add implements Operation {
      * @param add1 Logic Operation 
      * @param add2 Logic Operation
      */
-    Add(Slogic add1, Slogic add2){
+    public Add(Operation add1, Operation add2){
         this.add1 =add1;
         this.add2= add2;
     }
@@ -22,10 +23,10 @@ public class Add implements Operation {
     /**
      * to evaluate Operations and Constants
      *
-     * @return a AbstractConstant with the value of the Operation or AbstractConstant
+     * @return a ScrabType with the value of the Operation or ScrabType
      */
     @Override
-    public AbstractConstant Eval() {
-        return (AbstractConstant) add1.Eval().add((ScrabType) add2.Eval());
+    public ScrabType Eval() {
+        return (add1.Eval().Add(add2.Eval()));
     }
 }
