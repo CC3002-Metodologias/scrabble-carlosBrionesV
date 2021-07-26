@@ -1,7 +1,6 @@
 package STypes;
 
-import AST.Operation;
-import STypes.Numbers.SNumber;
+import AST.Operations.Operation;
 import operands.Slogic;
 
 /**

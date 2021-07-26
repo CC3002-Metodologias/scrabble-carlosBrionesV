@@ -1,6 +1,7 @@
 package AST;
 
 
+import AST.Operations.Operation;
 import STypes.ScrabType;
 
 /**
@@ -14,6 +15,15 @@ public class AST{
      * @param op the operation tree
      */
     public AST(Operation op){
+        AST=op;
+    }
+
+    /**
+     * Constructor AST empty
+      */
+    public AST(){}
+
+    public void SetOp(Operation op){
         AST=op;
     }
 

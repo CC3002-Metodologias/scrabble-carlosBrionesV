@@ -1,9 +1,8 @@
 package STypes;
 
 
-import AST.Operation;
+import AST.Operations.Operation;
 import AST.ScrabFactory;
-import operands.Slogic;
 
 import java.util.Objects;
 

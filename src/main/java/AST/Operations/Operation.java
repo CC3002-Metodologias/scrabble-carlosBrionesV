@@ -1,6 +1,7 @@
-package AST;
+package AST.Operations;
 
 
+import AST.AST;
 import STypes.ScrabType;
 
 /**

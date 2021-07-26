@@ -1,4 +1,4 @@
-package classes;
+package STypes;
 
 import AST.ScrabFactory;
 import STypes.Numbers.ScrabFloat;

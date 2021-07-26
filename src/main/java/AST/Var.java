@@ -1,12 +1,13 @@
 package AST;
 
+import AST.Operations.Operation;
 import STypes.ScrabType;
 
 /**
  * class to create vars
  * like "a"=2
  */
-public class Var implements Operation{
+public class Var implements Operation {
     ScrabFactory factory;
     String key;
 
