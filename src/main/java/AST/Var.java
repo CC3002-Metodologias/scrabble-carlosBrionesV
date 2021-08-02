@@ -30,4 +30,24 @@ public class Var implements Operation {
     public ScrabType Eval() {
         return factory.getVar(this.key);
     }
+
+    /**
+     * change Operation 1 from Operations
+     *
+     * @param op the new Operation
+     */
+    @Override
+    public void setop1(Operation op) {
+
+    }
+
+    /**
+     * change Operation 2 from Operations
+     *
+     * @param op the new Operation
+     */
+    @Override
+    public void setop2(Operation op) {
+
+    }
 }

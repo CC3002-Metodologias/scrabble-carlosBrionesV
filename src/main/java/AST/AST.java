@@ -23,7 +23,11 @@ public class AST{
       */
     public AST(){}
 
-    public void SetOp(Operation op){
+    /**
+     * set the operation of the AST
+     * @param op the operation
+     */
+    public void setOp(Operation op){
         AST=op;
     }
 
