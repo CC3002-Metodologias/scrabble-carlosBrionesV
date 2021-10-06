@@ -1,7 +1,7 @@
 package STypes.Numbers;
 
 
-import AST.Operation;
+import AST.Operations.Operation;
 import AST.ScrabFactory;
 import STypes.AbstracType;
 import STypes.ScrabString;

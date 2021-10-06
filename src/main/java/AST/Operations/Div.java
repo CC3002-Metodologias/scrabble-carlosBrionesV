@@ -1,25 +1,28 @@
 package AST.Operations;
 
-import AST.Operation;
-import STypes.Numbers.SNumber;
 import STypes.ScrabType;
 
 /**
  * Div class for AST
  */
-public class Div implements Operation {
-    Operation div1;
-    Operation div2;
+public class Div extends AbstractOperation   implements Operation {
+    Operation op1;
+    Operation op2;
 
     /**
      * Constructor
-     * @param div1 Logic Operation 
-     * @param div2 Logic Operation
+     * @param op1 Logic Operation 
+     * @param op2 Logic Operation
      */
-    public Div(Operation div1, Operation div2){
-        this.div1 =div1;
-        this.div2= div2;
+    public Div(Operation op1, Operation op2){
+        this.op1 =op1;
+        this.op2= op2;
     }
+
+    /**
+     * Constructor Div empty
+     */
+    public Div(){}
 
     /**
      * to evaluate Operations and Constants
@@ -28,6 +31,7 @@ public class Div implements Operation {
      */
     @Override
     public ScrabType Eval() {
-        return  div1.Eval().Div( div2.Eval());
+        return  op1.Eval().Div( op2.Eval());
     }
+
 }

@@ -1,5 +1,7 @@
 package AST;
 
+import Exceptions.NullException;
+import Exceptions.TypeException;
 import STypes. *;
 import STypes.Numbers. *;
 
@@ -60,9 +62,9 @@ public class ScrabFactory {
      * @param value a string with the value
      * @return a ScrabString with the value
      */
-    public ScrabString createString(String value){
-        if(!strings.containsKey(value)){
-            strings.put(value, new ScrabString(value,this));
+    public ScrabString createString(String value) {
+        if (!strings.containsKey(value)) {
+            strings.put(value, new ScrabString(value, this));
         }
         return strings.get(value);
     }
@@ -90,7 +92,7 @@ public class ScrabFactory {
      */
     public ScrabInt createInt(int value){
         if(!ints.containsKey(value)){
-            ints.put(value, new ScrabInt(value,this));
+                ints.put(value, new ScrabInt(value,this));
         }
         return ints.get(value);
     }
@@ -102,7 +104,7 @@ public class ScrabFactory {
      * @param value a boolean with the value
      * @return a ScrabBoolean with the value
      */
-    public ScrabBoolean createBoolean(boolean value){
+    public ScrabBoolean createBoolean(boolean value)  {
         if(!booleans.containsKey(value)){
             booleans.put(value, new ScrabBoolean(value,this));
         }
@@ -114,12 +116,14 @@ public class ScrabFactory {
      * If value is not in the HashMap
      * it is put in it
      * @param value a string with the value
-     * @return a ScrabBinary with the value
      */
-    public ScrabBinary createBinary(String value){
-        if(!binarys.containsKey(value)){
-            binarys.put(value, new ScrabBinary(value,this));
+    public ScrabBinary createBinary(String value) {
+        if (!binarys.containsKey(value)) {
+
+                binarys.put(value, new ScrabBinary(value, this));
+
         }
         return binarys.get(value);
     }
+
 }

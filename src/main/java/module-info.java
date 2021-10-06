@@ -1,5 +1,5 @@
 //module scrabble.main {
-  //exports cl.uchile.dcc.scrabble.gui;
+  //exports gui;
   //requires javafx.controls;
   //requires org.jetbrains.annotations;
 //}

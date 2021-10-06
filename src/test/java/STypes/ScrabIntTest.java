@@ -1,10 +1,9 @@
-package classes;
+package STypes;
 
 import AST.ScrabFactory;
 import STypes.Numbers.ScrabBinary;
 import STypes.Numbers.ScrabFloat;
 import STypes.Numbers.ScrabInt;
-import STypes.ScrabString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;

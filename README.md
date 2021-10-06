@@ -34,5 +34,20 @@ operacion posible para los *ScrabType*. Además de esto se creó una fábrica im
 cada *ScrabType* y Variables, para estas se creó una clase *Var* que permite asignarle un valor a un nombre cualquiera
 así en el arbol se crear una variable con ese nombre y se hará referencia asu valor.
 
+***GUI***
+
+El funcionamiento de la gui es el siguiente: para iniciarla desde intellij se debe ejecutar scrabble-carlosBriones [run]
+primero se debe seleccionar el tipo de nodo que uno quiere, ingresar el valor si es necesario y luego hacer click en 
+crear nuevo nodo, esto hará aparecer un nodo en la ventana con el valor correspondiente, este nodo se puede arrastrar.
+Las variables no fueron implementadas y el botón de negación tampoco (por temas de mi memoria jaja).
+
+Al crear uno de los siguientes nodos *Addition, And, Division, subtraction, Multiplication, Or* tendrán lineas,
+estas se pueden seleccionar y llevando el mouse hacia otro nodo sin soltar el botón se pueden unir (queda más lindo
+si el nodo padre fue creado antes que el hijo, hay que mover el nodo hijo después de la acción para que se vea la unión), 
+esta característica funciona en la linea izquierda pero no en la derecha 
+(no se por qué), este hecho imposibilitó que el árbol funcione de manera apropiada. 
+Si el primer nodo es de ScrabbleType y se preciona evaluar entregará el valor de ese nodo.
+
+
 ***TESTS***
 Para ejecutar los tests se debe utilizar gradle ejecutando los test en 'scrabble.test'.

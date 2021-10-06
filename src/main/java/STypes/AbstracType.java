@@ -1,8 +1,6 @@
 package STypes;
 
-import AST.Operation;
-import AST.ScrabFactory;
-import STypes.Numbers.SNumber;
+import AST.Operations.Operation;
 import operands.Slogic;
 
 /**
@@ -101,4 +99,18 @@ public abstract class AbstracType implements ScrabType {
     public ScrabType Neg() {
         return null;
     }
+
+    /**
+     * change Operation 1 from Operations
+     * in ScrabbleTypes does nothing
+     * @param op the new Operation
+     */
+    public void setop1(Operation op){}
+
+    /**
+     * change Operation 2 from Operations
+     * in Scrabble types does nothing
+     * @param op the new Operation
+     */
+    public void setop2(Operation op){}
 }

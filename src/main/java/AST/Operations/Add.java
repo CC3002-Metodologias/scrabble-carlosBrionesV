@@ -1,24 +1,28 @@
 package AST.Operations;
 
-import AST.Operation;
 import STypes.ScrabType;
 
 /**
  * Add class for AST
  */
-public class Add implements Operation {
-    Operation add1;
-    Operation add2;
+public class Add extends AbstractOperation implements Operation {
+    Operation op1;
+    Operation op2;
 
     /**
      * Constructor
-     * @param add1 Logic Operation 
-     * @param add2 Logic Operation
+     * @param op1 Logic Operation 
+     * @param op2 Logic Operation
      */
-    public Add(Operation add1, Operation add2){
-        this.add1 =add1;
-        this.add2= add2;
+    public Add(Operation op1, Operation op2){
+        this.op1 =op1;
+        this.op2= op2;
     }
+    
+    /**
+     * Constructor Add empty
+     */
+    public Add(){}
 
     /**
      * to evaluate Operations and Constants
@@ -27,6 +31,8 @@ public class Add implements Operation {
      */
     @Override
     public ScrabType Eval() {
-        return (add1.Eval().Add(add2.Eval()));
+        return (op1.Eval().Add(op2.Eval()));
     }
+
+
 }

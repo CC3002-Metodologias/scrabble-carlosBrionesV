@@ -1,9 +1,7 @@
-package classes;
+package STypes;
 
 import AST.ScrabFactory;
 import STypes.Numbers.ScrabBinary;
-import STypes.ScrabBoolean;
-import STypes.ScrabString;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -86,7 +84,7 @@ class ScrabBooleanTest {
         var expected= factory.createBoolean(true);
         assertEquals(expected,bool2);
 
-        System.out.print("aaaaaaaaaaaaan\n");
+
         Bool.neg();
         op= factory.createBoolean(false);
         expected= factory.createBoolean(false);

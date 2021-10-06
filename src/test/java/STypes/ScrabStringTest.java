@@ -1,11 +1,9 @@
-package classes;
+package STypes;
 
 
 import AST.ScrabFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import STypes.ScrabString;
 
 import static org.junit.jupiter.api.Assertions.*;
 

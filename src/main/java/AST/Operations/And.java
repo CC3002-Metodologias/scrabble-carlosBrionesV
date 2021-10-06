@@ -1,25 +1,28 @@
 package AST.Operations;
 
-import AST.Operation;
 import STypes.ScrabType;
-import operands.Slogic;
 
 /**
  * And class for AST
  */
-public class And implements Operation {
-    Operation and1;
-    Operation and2;
+public class And extends AbstractOperation  implements Operation {
+    Operation op1;
+    Operation op2;
 
     /**
      * Constructor
-     * @param and1 Logic Operation
-     * @param and2 Logic Operation
+     * @param op1 Logic Operation
+     * @param op2 Logic Operation
      */
-    public And(Operation and1, Operation and2){
-        this.and1 =and1;
-        this.and2= and2;
+    public And(Operation op1, Operation op2){
+        this.op1 =op1;
+        this.op2= op2;
     }
+    
+    /**
+     * Constructor And empty
+     */
+    public And(){}
 
     /**
      * to evaluate Operations and Constants
@@ -28,6 +31,7 @@ public class And implements Operation {
      */
     @Override
     public ScrabType Eval() {
-        return  and1.Eval().And( and2.Eval());
+        return  op1.Eval().And( op2.Eval());
     }
+
 }

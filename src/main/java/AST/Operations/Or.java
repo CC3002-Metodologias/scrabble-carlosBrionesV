@@ -1,25 +1,28 @@
 package AST.Operations;
 
-import AST.Operation;
 import STypes.ScrabType;
-import operands.Slogic;
 
 /**
  * Or class for AST
  */
-public class Or implements Operation {
-    Operation or1;
-    Operation or2;
+public class Or extends AbstractOperation   implements Operation {
+    Operation op1;
+    Operation op2;
 
     /**
      * Constructor
-     * @param or1 Logic Operation 
-     * @param or2 Logic Operation
+     * @param op1 Logic Operation 
+     * @param op2 Logic Operation
      */
-    public Or(Operation or1, Operation or2){
-        this.or1 =or1;
-        this.or2= or2;
+    public Or(Operation op1, Operation op2){
+        this.op1 =op1;
+        this.op2= op2;
     }
+
+    /**
+     * Constructor Or empty
+     */
+    public Or(){}
 
     /**
      * to evaluate Operations and Constants
@@ -28,6 +31,6 @@ public class Or implements Operation {
      */
     @Override
     public ScrabType Eval() {
-        return  or1.Eval().Or(or2.Eval());
+        return  op1.Eval().Or(op2.Eval());
     }
 }

@@ -1,22 +1,26 @@
 package AST.Operations;
-import AST.Operation;
 import STypes.ScrabType;
 
 
 /**
  * Neg class for AST
  */
-public class Neg implements Operation{
+public class Neg extends AbstractOperation   implements Operation{
 
-    Operation neg1;
+    Operation op1;
 
     /**
      * Constructor
-     * @param neg1 Operation
+     * @param op1 Operation
      */
-    public Neg(Operation neg1){
-        this.neg1 =neg1;
+    public Neg(Operation op1){
+        this.op1 =op1;
     }
+
+    /**
+     * Constructor Neg empty
+     */
+    public Neg(){}
 
     /**
      * to evaluate Operations and Constants
@@ -25,6 +29,9 @@ public class Neg implements Operation{
      */
     @Override
     public ScrabType Eval() {
-        return  neg1.Eval().Neg();
+        return  op1.Eval().Neg();
     }
+
+    @Override
+    public void setop2(Operation op){}
 }

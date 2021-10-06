@@ -1,12 +1,13 @@
 package AST;
 
+import AST.Operations.Operation;
 import STypes.ScrabType;
 
 /**
  * class to create vars
  * like "a"=2
  */
-public class Var implements Operation{
+public class Var implements Operation {
     ScrabFactory factory;
     String key;
 
@@ -28,5 +29,25 @@ public class Var implements Operation{
     @Override
     public ScrabType Eval() {
         return factory.getVar(this.key);
+    }
+
+    /**
+     * change Operation 1 from Operations
+     *
+     * @param op the new Operation
+     */
+    @Override
+    public void setop1(Operation op) {
+
+    }
+
+    /**
+     * change Operation 2 from Operations
+     *
+     * @param op the new Operation
+     */
+    @Override
+    public void setop2(Operation op) {
+
     }
 }
